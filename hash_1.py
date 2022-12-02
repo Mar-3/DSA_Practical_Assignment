@@ -20,18 +20,36 @@ class Hash:
 
     # https://www.geeksforgeeks.org/folding-method-in-hashing/ used for
     # understanding the folding method in hashing.
+    # def fold(self, value):
+    #     # fold the value to get address:
+    #     folded = []
+    #     new_string = ''
+    #     foldedSum = 0
+    #     value = str(value)
+    #     ## Inspiration for the folding algorithm from this site: https://www.baeldung.com/folding-hashing-technique (Ended up just using squaring, not taking the middle part of the squared number)
+    #     ## This folding algorithm chops the string/int to 2 character long parts. Then squares them and sums up all the
+    #     ## squared parts to get the dividant for the address. 
+    #     for i in range(0,len(value)-1,2):
+    #             new_string = str(int(str(ord(value[i]))+str(ord(value[i+1]))))
+    #             folded.append(int(new_string)^2)
+    #     foldedSum = sum(folded)
+    #     address = foldedSum%self.size
+    #     return address
+
     def fold(self, value):
         # fold the value to get address:
         folded = []
-        new_string = ''
         foldedSum = 0
+        mul = 1
         value = str(value)
-        ## This folding algorithm chops the string/int to 2 character long parts. Then squares them and sums up all the
-        ## squared parts to get the dividant for the address. 
-        for i in range(0,len(value)-1,2):
-                new_string = str(int(str(ord(value[i]))+str(ord(value[i+1]))))
-                folded.append(int(new_string)^2)
-        foldedSum = sum(folded)
+        # Folding algorithm is the one used in OpenDSA: Hashing -materials
+        for i in range(0, len(value)):
+            if (i % 4 == 0):
+                mul = 1
+            else:
+                mul = mul*256
+            foldedSum+=ord(value[i]) * mul
+
         address = foldedSum%self.size
         return address
             
@@ -103,3 +121,4 @@ class Hash:
 
 if __name__ == "__main__":
     hash = Hash(3)
+    hash.insert(123213)
