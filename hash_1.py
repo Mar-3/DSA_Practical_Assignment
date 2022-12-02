@@ -11,8 +11,10 @@ class Node:
 
 class Hash:
     def __init__(self, size):
+        self.slots = []
         self.size = size
-        self.slots = [Node(None, None)]*size
+        for i in range(0, size):
+            self.slots.append(Node(None,None))
 
     def fold(self, value):
         # fold the value to get address:
@@ -34,11 +36,14 @@ class Hash:
     def insert(self, value):
         address = self.fold(value)
         node = self.slots[address]
-        while (node != None):
-            if node.value == value:
+        if (node.value == None):
+            node.value = value
+            return None
+        while (node.next != None):
+            if (node.value == value):
                 return None
             node = node.next
-        node = Node(value, None)
+        node.next = Node(value, None)
         return None
 
 
@@ -50,7 +55,7 @@ class Hash:
         while (node != None):
             if node.value == value:
                 if (previousNode == None):
-                    self.slots[address] = node.next
+                    self.slots[address].value = None
                 else:
                     previousNode.next = node.next
                 break
@@ -72,13 +77,14 @@ class Hash:
         # Prints all the contents of the hash, differentiates which values are on the
         # same address slot in a linked list.
         for slot in self.slots:
-            if slot.value != None:
+            if slot.value == None:
+                print("[]")
+            else:
                 node = slot
-                print("These are same address:")
                 while (node != None):
-                    print(node.value)
+                    print(node.value, end='->') 
                     node = node.next
-                print("END")
+                print("[]")
         return None
 
 
