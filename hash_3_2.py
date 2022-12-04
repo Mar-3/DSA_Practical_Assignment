@@ -1,8 +1,15 @@
+## BM40A1500 Data Structures and Algorithms  -  Practical assignment
+## XXXXXX - hash_3_2.py
+## 04.12.2022
+
+# 3. The Pressure Test
+## Testing the Python list performance.
+
 import sys
 import time
 
 if __name__ == "__main__":
-    # Initializing the ne Hash-table and taking 
+    # Initializing the Python list 
     initializeStartTimeSeconds = time.time()
     words1List = []
     initializeDoneTimeSeconds = time.time()
@@ -11,7 +18,7 @@ if __name__ == "__main__":
     file2Name = "words_alpha.txt"
 
     try:
-        #Reading the file and inserting words
+        # Reading the file and inserting words
         insertsStartTimeSeconds = time.time()
         tiedosto = open(file1Name, 'r')
         row = tiedosto.readline()[:-1]
@@ -21,7 +28,7 @@ if __name__ == "__main__":
         tiedosto.close()
         insertsDoneTimeSeconds = time.time()
 
-        ## Reading the second file and searching for the words
+        # Reading the second file and searching for the words
         searchStartTimeSeconds = time.time()
 
         tiedosto = open(file2Name, 'r')

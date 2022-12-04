@@ -1,6 +1,8 @@
 ## BM40A1500 Data Structures and Algorithms  -  Practical assignment
-## Marko Jutila - hash_1.py
-## 01.12.2022
+## XXXXXX - hash_1.py
+## 04.12.2022
+
+# 1. Implementing the Hash Table
 
 ## Node class is used for chaining together values in same array using linked lists
 class Node:
@@ -40,7 +42,7 @@ class Hash:
     def fold(self, value):
         sum = 5381
         value = str(value)
-        # every loop: sum = (sum * 3) + ASCII vlaue of character
+        # every loop: sum = (sum * 3) + ASCII value of character
         # Uses bitshift operators for efficiency
         for i in range(0, len(value)):
             sum = ((sum << 5) + sum) + ord(value[i])
@@ -53,7 +55,7 @@ class Hash:
         # Goes through the linked list and adds the value to the end of the list if not found.
         index = self.fold(value)
         node = self.hashTable[index]
-        if (node.value == None):
+        if (self.hashTable[index].value == None):
             node.value = value
             return None
         while (node.next != None):
@@ -69,7 +71,7 @@ class Hash:
         node = self.hashTable[index]
         previousNode = None
         # Goes through the linked list and using object references
-        # deletes the wanted value from the table
+        # deletes the target value from the table or linked list
         while (node != None):
             if node.value == value:
                 if (previousNode == None):
@@ -104,6 +106,3 @@ class Hash:
                     node = node.next
                 print("[]")
         return None
-
-if __name__ == "__main__":
-    hash = Hash(3)
