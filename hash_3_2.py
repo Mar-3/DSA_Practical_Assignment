@@ -1,11 +1,10 @@
-from hash_1 import Hash
 import sys
 import time
 
 if __name__ == "__main__":
     # Initializing the ne Hash-table and taking 
     initializeStartTimeSeconds = time.time()
-    hash = Hash(10000)
+    words1List = []
     initializeDoneTimeSeconds = time.time()
     commonWords = 0
     file1Name = "kaikkisanat.txt"
@@ -17,17 +16,18 @@ if __name__ == "__main__":
         tiedosto = open(file1Name, 'r')
         row = tiedosto.readline()[:-1]
         while (row != ''):
-            hash.insert(row)
+            words1List.append(row)
             row = tiedosto.readline()[:-1]
         tiedosto.close()
         insertsDoneTimeSeconds = time.time()
 
         ## Reading the second file and searching for the words
         searchStartTimeSeconds = time.time()
+
         tiedosto = open(file2Name, 'r')
         row = tiedosto.readline()[:-1]
         while (row != ''):
-            if hash.search(row):
+            if row in words1List:
                 commonWords+=1
             row = tiedosto.readline()[:-1]
         tiedosto.close()
@@ -35,13 +35,11 @@ if __name__ == "__main__":
         searchDoneTimeSeconds = time.time()
 
         ## Final prints and times:
-        hash.print()
-        print("Initializing the hash table: " + str(initializeDoneTimeSeconds-initializeStartTimeSeconds) + "s")
-        print("Adding the words: " + str(insertsDoneTimeSeconds-insertsStartTimeSeconds) + "s")
+        print("Initializing the list: " + str(initializeDoneTimeSeconds-initializeStartTimeSeconds) + "s")
+        print("Adding the words to the list: " + str(insertsDoneTimeSeconds-insertsStartTimeSeconds) + "s")
         print("Finding the common words: " + str(searchDoneTimeSeconds-searchStartTimeSeconds) + "s")
-        print("All: " + str((initializeDoneTimeSeconds-initializeStartTimeSeconds)+(insertsDoneTimeSeconds-insertsStartTimeSeconds)+(searchDoneTimeSeconds-searchStartTimeSeconds)))
         print("Common words: " + str(commonWords))
     except Exception as e:
-        print("Error. Quitting..")
+        print("Error in file handling. Quitting")
         print(e)
         sys.exit(0)
